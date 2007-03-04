@@ -1,1 +1,2 @@
-Dir[File.join(File.dirname(__FILE__), 'hpricot_scrub/**/*.rb')].sort.each { |lib| require lib }
+require 'hpricot_scrub/hpricot_scrub'
+require 'hpricot_scrub/version'

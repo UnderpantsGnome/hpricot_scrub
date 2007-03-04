@@ -15,9 +15,8 @@ AUTHOR = "UnderpantsGnome"  # can also be an array of Authors
 EMAIL = "michael@underpantsgnome.com"
 DESCRIPTION = "Scrub HTML with Hpricot"
 GEM_NAME = "hpricot_scrub" # what ppl will type to install your gem
-RUBYFORGE_PROJECT = "hpricot_scrub" # The unix name for your project
+RUBYFORGE_PROJECT = "hpricot-scrub" # The unix name for your project
 HOMEPATH = "http://trac.underpantsgnome.com/hpricot_scrub/"
-
 
 NAME = "hpricot_scrub"
 REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil

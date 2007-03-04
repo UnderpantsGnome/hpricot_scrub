@@ -32,6 +32,13 @@ module Hpricot
   class Elem
     include Scrubable
 
+    def scrub(config)
+      children.reverse.each { |c| 
+        c.scrub(config) if c.scrubable? && ! config[:allow_tags].include?(c.name)
+      }
+      strip unless config[:allow_tags].include?(name)
+    end
+
     def remove
       parent.children.delete(self)
     end
@@ -48,7 +55,7 @@ module Hpricot
     
     def strip_attributes(safe=[])
       attributes.each {|atr|
-          remove_attribute(atr[0]) unless safe.include?(atr[0])
+        remove_attribute(atr[0]) unless safe.include?(atr[0])
       } unless attributes.nil?
     end
     
@@ -70,10 +77,18 @@ module Hpricot
       config[:allow_tags].each { |tag|
         (self/tag).strip_attributes(config[:allow_attributes])
       }
-      children.reverse.each {|e|
-        e.strip if e.scrubable? && ! config[:allow_tags].include?(e.name)
-      }
+      children.reverse.each {|c| c.scrub(config) if c.scrubable? }
       self
     end
+  end
+end
+
+class String
+  def scrub!
+    self.gsub!(/^(\n|.)*$/, Hpricot(self).scrub.inner_html)
+  end
+
+  def scrub
+    dup.scrub!
   end
 end

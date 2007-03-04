@@ -6,4 +6,4 @@ of tags and attributes you don't want in the final output.
 
 See examples/config.yml for a sample config file or 
 
-http://underpantsgnome.com/2007/01/20/hpricot-scrub/
+http://trac.underpantsgnome.com/hpricot_scrub
