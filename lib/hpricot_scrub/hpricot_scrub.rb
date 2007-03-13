@@ -11,7 +11,8 @@ require 'hpricot'
 module Hpricot
   module Scrubable
     def scrubable?
-      ! [Hpricot::Text, Hpricot::BogusETag].include?(self.class)
+      ! [Hpricot::Text, Hpricot::BogusETag].include?(self.class) &&
+        self.respond_to?(:scrub)
     end
   end
 

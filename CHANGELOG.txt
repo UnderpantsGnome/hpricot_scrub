@@ -1,4 +1,10 @@
 2007-03-04 Michael <michael@underpantsgnome.com>
+	Release 0.2.2
+	Add patches from Eric Wong 
+		- Apparently my environment is automagically including YAML, added that
+		- Add a check to see if an element responds to scrub when calling scrubable?
+	
+2007-03-04 Michael <michael@underpantsgnome.com>
 	Release 0.2.0
 	Add String methods for scrub and scrub!
 	
