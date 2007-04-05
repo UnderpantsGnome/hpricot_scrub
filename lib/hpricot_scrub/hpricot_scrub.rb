@@ -10,9 +10,12 @@ require 'hpricot'
 
 module Hpricot
   module Scrubable
+    # TODO: figure out how to handle comments
     def scrubable?
-      ! [Hpricot::Text, Hpricot::BogusETag].include?(self.class) &&
-        self.respond_to?(:scrub)
+      ! [ Hpricot::Text, 
+          Hpricot::BogusETag, 
+          Hpricot::Comment
+        ].include?(self.class) && self.respond_to?(:scrub)
     end
   end
 
@@ -34,9 +37,7 @@ module Hpricot
     include Scrubable
 
     def scrub(config)
-      children.reverse.each { |c| 
-        c.scrub(config) if c.scrubable? && ! config[:allow_tags].include?(c.name)
-      }
+      children.reverse.each { |c| c.scrub(config) if c.scrubable? }
       strip unless config[:allow_tags].include?(name)
     end
 
@@ -61,7 +62,7 @@ module Hpricot
     end
     
     def strip_removes?
-      # I'm sure there are others that shuould be ripped instead of stripped
+      # TODO: find other elements that should be removed instead of stripped
       attributes && attributes['type'] =~ /script|css/
     end
   end
@@ -93,3 +94,26 @@ class String
     dup.scrub!
   end
 end
+
+begin
+  require 'htmlentities'
+  
+  module Hpricot
+    class Scrub
+      @coder = HTMLEntities.new
+      class << self
+        def entifier; @coder end
+      end
+    end
+  end
+  
+  class String
+    def decode!
+      self.gsub!(/^(\n|.)*$/, Hpricot::Scrub.entifier.decode(self))
+    end
+
+    def decode
+      dup.decode!
+    end
+  end
+rescue LoadError; end

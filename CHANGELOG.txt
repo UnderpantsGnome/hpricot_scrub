@@ -1,3 +1,9 @@
+2007-04-05 Michael <michael@underpantsgnome.com>
+	Release 0.2.3
+	Add patches from Eric Wong
+		- Recursive scrubbing wasn't scrubbing if parent was in allow
+		- Add optional use of HTMLEntities
+
 2007-03-04 Michael <michael@underpantsgnome.com>
 	Release 0.2.2
 	Add patches from Eric Wong 
@@ -6,10 +12,10 @@
 	
 2007-03-04 Michael <michael@underpantsgnome.com>
 	Release 0.2.0
-	Add String methods for scrub and scrub!
+		- Add String methods for scrub and scrub!
 	
-	Fixed a bug where nested elements were not being scrubbed when using a 
-	config hash
+		- Fixed a bug where nested elements were not being scrubbed when using a 
+			config hash
 
 2007-03-03 Michael <michael@underpantsgnome.com>
-	Release 0.1.0, Initial Gem version
+		- Release 0.1.0, Initial Gem version
