@@ -9,4 +9,5 @@ lib/hpricot_scrub.rb
 test/test_helper.rb
 test/scrubber_data.rb
 test/hpricot_scrub_test.rb
-examples/config.yml
+test/old_hpricot_scrub_test.rb
+examples/old_config.yml

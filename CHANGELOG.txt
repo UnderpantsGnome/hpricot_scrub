@@ -1,3 +1,12 @@
+2008-01-11 Mina Naguib <mina.hpricotscrub@naguib.ca>
+	Release 0.3.0
+	Large overhaul of the module's logic to mimic most of perl's HTML::Scrubber
+	functionality:
+  	- Deprecate config keys :allow_tags, :remove_tags and :allow_attributes
+		- Introduce config keys :elem_rules, :default_elem_rule,
+		  :default_comment_rule and :default_attribute_rule
+		- Document the above (inline - visible in rdoc & the likes)
+
 2007-04-05 Michael <michael@underpantsgnome.com>
 	Release 0.2.3
 	Add patches from Eric Wong
