@@ -15,7 +15,9 @@ class HpricotScrubTest < Test::Unit::TestCase
         "a" =>  {
           "href"  =>  %r|^https?://|i
         },
-        "b" => true,
+        "b" => Proc.new do |bold_element|
+          bold_element.parent.name == "p" ? true : :strip
+        end,
         "body"  =>  {
           "lang" => %w(en es fr)
         },
@@ -67,7 +69,6 @@ class HpricotScrubTest < Test::Unit::TestCase
   def test_elem_rule_keep
      @scrubbed_docs.each_with_index do |doc, i|
        assert_equal @docs[i].search("//a").length, doc.search("//a").length
-       assert_equal @docs[i].search("//b").length, doc.search("//b").length
        assert_equal @docs[i].search("//img").length,  doc.search("//img").length
      end
   end
@@ -83,6 +84,12 @@ class HpricotScrubTest < Test::Unit::TestCase
      @scrubbed_docs.each do |doc|
        assert_equal 0, doc.search("//marquee").length
        assert_equal 0, doc.search("//span").length
+     end
+  end
+
+  def test_elem_rule_proc
+     @scrubbed_docs.each_with_index do |doc, i|
+       assert_equal @docs[i].search("//p/b").length, doc.search("//b").length
      end
   end
 

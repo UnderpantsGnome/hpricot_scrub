@@ -38,15 +38,15 @@ module Hpricot
       #
       # Merge+delete legacy config keys
       #
-      # :remove_tags
+      # :remove_tags -> :elem_rules (false)
       (config.delete(:remove_tags) || []).each do |tag|
         config[:elem_rules][tag] = false unless config[:elem_rules].has_key?(tag)
       end
-      # :allow_tags
+      # :allow_tags -> :elem_rules (true)
       (config.delete(:allow_tags) || []).each do |tag|
         config[:elem_rules][tag] = true unless config[:elem_rules].has_key?(tag)
       end
-      # :allow_attributes
+      # :allow_attributes -> :default_attribute_rule (procs)
       (config.delete(:allow_attributes) || []).each do |attribute|
         #
         # Add it to the default attribute rule
@@ -174,13 +174,14 @@ module Hpricot
     # Scrubs the element according to the given config
     # The relevant config key is :elem_rules.  It is expected to be a Hash having String HTML tag names as keys, and a rule as values
     # The rule value dictates what happens to the element.  The following logic is used:
-    #   If the rules is false, the element is removed
+    #   If the rule is false/nil, the element is removed along with all it's children
     #   If the rule is :strip, the element is stripped (the element itself is deleted and its children are promoted upwards to where it was)
+    #   If the rule is a proc, the proc is called (and given the element itself) - the proc's expected to return a valid rule that matches this documentation
     #   Otherwise the element is kept
     #
     #  If the element name (HTML tag) was not found in :elem_rules, the default rule in config key :default_elem_rule is used
     #
-    # After the above is done, scrub_attributes is called if the element was kept.  The rule is passed to it as it's assumed to be the attribute rules (see Hpricot::Scrub.keep_attribute?) to apply to the attributes, UNLESS the rule was explicitly "true", in which case the config key :default_attribute_rule is passed.
+    # After the above is done, if the element was kept, it's time to clean up its attributes so scrub_attributes is called.  The rule is passed to it as it's assumed to be the attribute rules (see Hpricot::Scrub.keep_attribute?) to apply to the attributes, UNLESS the rule was explicitly "true", in which case the config key :default_attribute_rule is passed.
     #
     # This is recursive and will do all the above to all the children of the element as well.
     #
@@ -193,6 +194,10 @@ module Hpricot
       end
 
       rule = config[:elem_rules].has_key?(name) ? config[:elem_rules][name] : config[:default_elem_rule]
+
+      while rule.is_a?(Proc)
+        rule = rule.call(self)
+      end
 
       if !rule
         remove

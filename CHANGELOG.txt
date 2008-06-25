@@ -1,3 +1,11 @@
+2008-06-03 Mina Naguib <mina.hpricotscrub@naguib.ca>
+	Release 0.3.1
+  	- Allow an element rule to be a Proc (which is expected to return one of
+	  the other non-proc rules (false/:strip/true/attr_rules).  This allows the
+	  building of highly custom filtering rules (for example filter out <B>
+	  tags unless their parent is a <P>...)
+	- Slight cleanup of internal documentation
+
 2008-01-11 Mina Naguib <mina.hpricotscrub@naguib.ca>
 	Release 0.3.0
 	Large overhaul of the module's logic to mimic most of perl's HTML::Scrubber
