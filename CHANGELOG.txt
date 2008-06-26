@@ -1,6 +1,10 @@
+2007-04-05 Michael <michael@underpantsgnome.com>
+	Release 0.3.2
+	- Fix broken dependancy in the gem
+
 2008-06-03 Mina Naguib <mina.hpricotscrub@naguib.ca>
 	Release 0.3.1
-  	- Allow an element rule to be a Proc (which is expected to return one of
+  - Allow an element rule to be a Proc (which is expected to return one of
 	  the other non-proc rules (false/:strip/true/attr_rules).  This allows the
 	  building of highly custom filtering rules (for example filter out <B>
 	  tags unless their parent is a <P>...)

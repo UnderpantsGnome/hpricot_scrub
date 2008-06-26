@@ -48,6 +48,6 @@ hoe = Hoe.new(GEM_NAME, VERS) do |p|
   
   # == Optional
   #p.changes        - A description of the release's latest changes.
-  p.extra_deps = ['hpricot', '>= 0.5']
+  p.extra_deps = [['hpricot',  '>= 0.5']]
   #p.spec_extras    - A hash of extra values to set in the gemspec.
 end

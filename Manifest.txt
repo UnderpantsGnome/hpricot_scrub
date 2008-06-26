@@ -1,7 +1,7 @@
 Rakefile
 README.txt
 CHANGELOG.txt
-Manifest.txt
+History.txt
 setup.rb
 lib/hpricot_scrub/hpricot_scrub.rb
 lib/hpricot_scrub/version.rb
@@ -10,4 +10,5 @@ test/test_helper.rb
 test/scrubber_data.rb
 test/hpricot_scrub_test.rb
 test/old_hpricot_scrub_test.rb
+examples/config.yml
 examples/old_config.yml
