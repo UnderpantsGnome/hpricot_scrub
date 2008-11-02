@@ -1,6 +1,6 @@
 require 'rubygems'
 
-if defined?(Kernel::gem)
+if defined?(gem)
   gem('hpricot', '>= 0.5')
 else
   require_gem('hpricot', '>= 0.5')
@@ -117,7 +117,7 @@ module Hpricot
 
     module Scrubbable
       def scrubbable?
-        ! [ Hpricot::Text, 
+        ! [ Hpricot::Text,
             Hpricot::BogusETag,
           ].include?(self.class) && self.respond_to?(:scrub)
       end
@@ -129,7 +129,7 @@ module Hpricot
     def strip
       each { |x| x.strip }
     end
-    
+
     def strip_attributes(safe=[])
       each { |x| x.scrub_attributes(safe) }
     end
@@ -224,7 +224,7 @@ module Hpricot
       end
       return true
     end
-    
+
   end #class Elem
 
   class Doc
@@ -259,7 +259,7 @@ end
 
 begin
   require 'htmlentities'
-  
+
   module Hpricot
     class Scrub
       @coder = HTMLEntities.new
@@ -268,7 +268,7 @@ begin
       end
     end
   end
-  
+
   class String
     def decode!
       self.gsub!(/^(\n|.)*$/, Hpricot::Scrub.entifier.decode(self))
