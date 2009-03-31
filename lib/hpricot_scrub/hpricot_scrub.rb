@@ -167,7 +167,11 @@ module Hpricot
     end
 
     def strip
-      swap(inner_html)
+      if (i = inner_html) != ""
+        swap(i)
+      else
+        remove
+      end
     end
 
     #
@@ -189,7 +193,7 @@ module Hpricot
 
       config = Scrub::normalize_config(config)
 
-      children.reverse.each do |child|
+      (children || []).reverse.each do |child|
         child.scrub(config) if child.scrubbable?
       end
 
