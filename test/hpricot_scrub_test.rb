@@ -93,6 +93,11 @@ class HpricotScrubTest < Test::Unit::TestCase
      end
   end
 
+  def test_elem_emptyelem
+    h = Hpricot("<br>")
+    assert_equal "", h.scrub.to_s
+  end
+
   def test_attr_default_rule_removes
      @scrubbed_docs.each do |doc|
        assert_equal 0, doc.search("*[@mce_src]").length

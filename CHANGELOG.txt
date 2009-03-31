@@ -1,3 +1,10 @@
+2009-03-30 Mina Naguib <mina.hpricotscrub@naguib.ca>
+	Release 0.3.5
+	- Fixes for recent versions of hpricot:
+	- Fix fatal error scrubbing anything that has no children (such as an
+	EmptyElem)
+	- Fix fatal error removing elements with no children
+
 2008-11-02 Michael <michael@underpantsgnome.com>
 	Release 0.3.4
 	- Fix gem command test - Thanks David Masover
