@@ -1,3 +1,8 @@
+2009-04-07 Mina Naguib <mina.hpricotscrub@naguib.ca>
+	Release 0.3.6
+	- More fixes for recent versions of hpricot:
+	- Fix fatal error scrubbing anything that has text or empty elements
+
 2009-03-30 Mina Naguib <mina.hpricotscrub@naguib.ca>
 	Release 0.3.5
 	- Fixes for recent versions of hpricot:
