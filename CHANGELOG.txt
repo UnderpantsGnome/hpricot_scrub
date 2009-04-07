@@ -1,3 +1,7 @@
+2009-04-07 Mina Naguib <mina.hpricotscrub@naguib.ca>
+	Release 0.3.6
+	- Fixes for recent versions of hpricot:
+
 2009-03-30 Mina Naguib <mina.hpricotscrub@naguib.ca>
 	Release 0.3.5
 	- Fixes for recent versions of hpricot:
