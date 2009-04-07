@@ -135,6 +135,14 @@ module Hpricot
     end
   end
 
+  class BogusETag
+    include Scrub::Scrubbable
+  end
+
+  class Text
+    include Scrub::Scrubbable
+  end
+
   class BaseEle
     include Scrub::Scrubbable
   end
