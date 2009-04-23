@@ -147,6 +147,10 @@ module Hpricot
     include Scrub::Scrubbable
   end
 
+  class CData
+    include Scrub::Scrubbable
+  end
+
   class Comment
     include Scrub::Scrubbable
 
