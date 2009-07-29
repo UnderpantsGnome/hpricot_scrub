@@ -151,6 +151,10 @@ module Hpricot
     include Scrub::Scrubbable
   end
 
+  class ProcIns
+    include Scrub::Scrubbable
+  end
+
   class Comment
     include Scrub::Scrubbable
 
