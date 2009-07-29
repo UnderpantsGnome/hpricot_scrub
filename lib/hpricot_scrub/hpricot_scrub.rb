@@ -253,7 +253,7 @@ module Hpricot
     #
     def scrub(config=nil)
       config = Scrub::normalize_config(config)
-      children.reverse.each do |child|
+      (children || []).reverse.each do |child|
         child.scrub(config) if child.scrubbable?
       end
       return self
