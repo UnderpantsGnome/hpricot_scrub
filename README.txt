@@ -1,16 +1,13 @@
 = hpricot_scrub
 
-http://trac.underpantsgnome.com/hpricot_scrub
+http://github.com/UnderpantsGnome/hpricot_scrub/tree/master
 
 == DESCRIPTION:
 
 HpricotScrub is a wrapper around Hpricot that allows you to easily scrub HTML
 of tags and attributes you don't want in the final output.
 
-See examples/config.yml for a sample config file or 
-
-== FEATURES/PROBLEMS:
-
+See examples/config.yml or examples/old_config.yml for a sample configs
 
 == SYNOPSIS:
 

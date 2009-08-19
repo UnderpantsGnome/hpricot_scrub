@@ -1,0 +1,24 @@
+---
+:elem_rules:
+  script: false
+  html: true
+  body:
+    lang:
+      - en
+      - es
+      - fr
+
+  strong: true
+  p: true
+  br: true
+  marquee: :strip
+  div:
+    - id
+    - class
+    - style
+  style: false
+  span: :strip
+  hr: true
+:default_elem_rule: :strip
+:default_comment_rule: false
+:default_attribute_rule: false
