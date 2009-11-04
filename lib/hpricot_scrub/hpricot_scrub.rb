@@ -135,6 +135,10 @@ module Hpricot
     end
   end
 
+  class DocType
+    include Scrub::Scrubbable
+  end
+
   class BogusETag
     include Scrub::Scrubbable
   end
