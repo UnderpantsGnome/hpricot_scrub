@@ -115,14 +115,6 @@ module Hpricot
 
     end
 
-    module Scrubbable
-      def scrubbable?
-        ! [ Hpricot::Text,
-            Hpricot::BogusETag,
-          ].include?(self.class) && self.respond_to?(:scrub)
-      end
-    end
-
   end
 
   class Elements
@@ -135,32 +127,7 @@ module Hpricot
     end
   end
 
-  class DocType
-    include Scrub::Scrubbable
-  end
-
-  class BogusETag
-    include Scrub::Scrubbable
-  end
-
-  class Text
-    include Scrub::Scrubbable
-  end
-
-  class BaseEle
-    include Scrub::Scrubbable
-  end
-
-  class CData
-    include Scrub::Scrubbable
-  end
-
-  class ProcIns
-    include Scrub::Scrubbable
-  end
-
   class Comment
-    include Scrub::Scrubbable
 
     def remove
       parent.children.delete(self)
@@ -180,7 +147,6 @@ module Hpricot
   end
 
   class Elem
-    include Scrub::Scrubbable
 
     def remove
       parent.children.delete(self)
@@ -214,7 +180,7 @@ module Hpricot
       config = Scrub::normalize_config(config)
 
       (children || []).reverse.each do |child|
-        child.scrub(config) if child.scrubbable?
+        child.scrub(config) if child.respond_to?(:scrub)
       end
 
       rule = config[:elem_rules].has_key?(name) ? config[:elem_rules][name] : config[:default_elem_rule]
@@ -241,8 +207,8 @@ module Hpricot
     # Loops over all the attributes on this element, and removes any which Hpricot::Scrub.keep_attribute? returns false for
     #
     def scrub_attributes(attribute_rule = nil)
-      if attributes
-        attributes.each do |key, value|
+      if raw_attributes
+        raw_attributes.each do |key, value|
           remove_attribute(key) unless Scrub.keep_attribute?(self, key, value, attribute_rule)
         end
       end
@@ -262,7 +228,7 @@ module Hpricot
     def scrub(config=nil)
       config = Scrub::normalize_config(config)
       (children || []).reverse.each do |child|
-        child.scrub(config) if child.scrubbable?
+        child.scrub(config) if child.respond_to?(:scrub)
       end
       return self
     end
