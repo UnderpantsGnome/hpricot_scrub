@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hpricot_scrub}
-  s.version = "0.3.8"
+  s.version = "0.3.10"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["UnderpantsGnome (Michael Moen)"]
+  s.authors = ["UnderpantsGnome (Michael Moen)", "minaguib (Mina Naguib)"]
   s.date = %q{2010-01-25}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{Scrub HTML with Hpricot like you would with perl HTML:Scrubber}
   s.email = %q{michael@underpantsgnome.com}
   s.extra_rdoc_files = [
     "README.txt"
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "examples/config.yml",
      "examples/old_config.yml",
+     "hpricot_scrub.gemspec",
      "lib/hpricot_scrub.rb",
      "lib/hpricot_scrub/hpricot_scrub.rb",
      "lib/hpricot_scrub/version.rb",
@@ -38,7 +39,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Scrub HTML with Hpricot}
   s.test_files = [
     "test/hpricot_scrub_test.rb",
      "test/old_hpricot_scrub_test.rb",
@@ -51,12 +52,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<hpricot>, [">= 0.5"])
+      s.add_runtime_dependency(%q<hpricot>, [">= 0.8.1"])
     else
-      s.add_dependency(%q<hpricot>, [">= 0.5"])
+      s.add_dependency(%q<hpricot>, [">= 0.8.1"])
     end
   else
-    s.add_dependency(%q<hpricot>, [">= 0.5"])
+    s.add_dependency(%q<hpricot>, [">= 0.8.1"])
   end
 end
 
