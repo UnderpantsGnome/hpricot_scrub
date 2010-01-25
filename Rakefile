@@ -9,7 +9,7 @@ begin
     gem.description = "Scrub HTML with Hpricot like you would with perl HTML:Scrubber"
     gem.email = "michael@underpantsgnome.com"
     gem.homepage = "http://github.com/UnderpantsGnome/hpricot_scrub"
-    gem.authors = ["UnderpantsGnome (Michael Moen)"]
+    gem.authors = ["UnderpantsGnome (Michael Moen)", "minaguib (Mina Naguib)"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     gem.add_dependency 'hpricot', '>=0.8.1'
   end
