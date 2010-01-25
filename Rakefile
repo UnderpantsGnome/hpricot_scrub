@@ -1,53 +1,53 @@
 require 'rubygems'
 require 'rake'
-require 'rake/clean'
-require 'rake/testtask'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
-require 'rake/contrib/rubyforgepublisher'
-require 'fileutils'
-require 'hoe'
-include FileUtils
-require File.join(File.dirname(__FILE__), 'lib', 'hpricot_scrub', 'version')
 
-AUTHOR = "UnderpantsGnome"  # can also be an array of Authors
-EMAIL = "michael@underpantsgnome.com"
-DESCRIPTION = "Scrub HTML with Hpricot"
-GEM_NAME = "hpricot_scrub" # what ppl will type to install your gem
-RUBYFORGE_PROJECT = "hpricot-scrub" # The unix name for your project
-HOMEPATH = "http://trac.underpantsgnome.com/hpricot_scrub/"
-
-NAME = "hpricot_scrub"
-REV = nil # UNCOMMENT IF REQUIRED: File.read(".svn/entries")[/committed-rev="(d+)"/, 1] rescue nil
-VERS = ENV['VERSION'] || (HpricotScrub::VERSION::STRING + (REV ? ".#{REV}" : ""))
-                          CLEAN.include ['**/.*.sw?', '*.gem', '.config']
-RDOC_OPTS = ['--quiet', '--title', "hpricot_scrub documentation",
-    "--opname", "index.html",
-    "--line-numbers", 
-    "--main", "README",
-    "--inline-source"]
-
-class Hoe
-  def extra_deps 
-    @extra_deps.reject { |x| Array(x).first == 'hoe' } 
-  end 
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "hpricot_scrub"
+    gem.summary = "Scrub HTML with Hpricot"
+    gem.description = "Scrub HTML with Hpricot like you would with perl HTML:Scrubber"
+    gem.email = "michael@underpantsgnome.com"
+    gem.homepage = "http://github.com/UnderpantsGnome/hpricot_scrub"
+    gem.authors = ["UnderpantsGnome (Michael Moen)"]
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_dependency 'hpricot', '>=0.5'
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-hoe = Hoe.new(GEM_NAME, VERS) do |p|
-  p.author = AUTHOR 
-  p.description = DESCRIPTION
-  p.email = EMAIL
-  p.summary = DESCRIPTION
-  p.url = HOMEPATH
-  p.rubyforge_name = RUBYFORGE_PROJECT if RUBYFORGE_PROJECT
-  p.test_globs = ["test/**/*_test.rb"]
-  p.clean_globs = CLEAN  #An array of file patterns to delete on clean.
-  
-  # == Optional
-  #p.changes        - A description of the release's latest changes.
-  p.extra_deps = [['hpricot',  '>= 0.5']]
-  #p.spec_extras    - A hash of extra values to set in the gemspec.
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
+end
+
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/*_test.rb'
+    test.verbose = true
+  end
+rescue LoadError
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
+end
+
+task :test => :check_dependencies
+
+task :default => :test
+
+require 'rake/rdoctask'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "hpricot_scrub #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end
