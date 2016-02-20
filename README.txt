@@ -12,6 +12,7 @@ See examples/config.yml or examples/old_config.yml for a sample configs
 == SYNOPSIS:
 
 require 'rubygems'
+require 'open-uri'
 require 'hpricot_scrub'
 
 doc = Hpricot(open('http://slashdot.org/').read)
